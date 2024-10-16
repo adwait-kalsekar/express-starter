@@ -1,16 +1,34 @@
 import express from "express";
 import cors, { CorsOptions } from "cors";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 import { CORS_ORIGIN } from "./constants";
+import logger from "./utils/logger";
 import healthCheckRouter from "./routes/healthCheck.route";
 
 // CONFIGS
 dotenv.config();
 
+const morganFormat = ":method :url :status :response-time ms";
+
 const corsConfig: CorsOptions = {
   origin: CORS_ORIGIN,
   credentials: true,
+};
+
+const morganConfig = {
+  stream: {
+    write: (message: string) => {
+      const logObject = {
+        method: message.split(" ")[0],
+        url: message.split(" ")[1],
+        status: message.split(" ")[2],
+        responseTime: message.split(" ")[3],
+      };
+      logger.info(JSON.stringify(logObject));
+    },
+  },
 };
 
 const jsonConfig = { limit: "16kb" };
@@ -22,6 +40,7 @@ const app = express();
 
 // MIDDLEWARES
 app.use(cors(corsConfig));
+app.use(morgan(morganFormat, morganConfig));
 app.use(express.json(jsonConfig));
 app.use(express.urlencoded(urlencodedConfig));
 app.use(express.static("public"));
