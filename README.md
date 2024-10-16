@@ -6,6 +6,7 @@ Professional Backend setup to use **NodeJS** with **ExpressJS**, **Typescript**
 **MongoDB** Connection using **Mongoose**
 
 - User model setup for test
+- Robust Authentication Mechanism using Mongoose hooks and JWT
 - Health Check routes and controllers for testing
 - Logging setup using **Winston** and **Morgan**
 
