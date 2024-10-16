@@ -1,0 +1,34 @@
+{
+  "name": "express_starter",
+  "version": "1.0.0",
+  "description": "Backend Starter Kit using NodeJS, ExpressJS and Typescript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "mongoose",
+    "express",
+    "typescript"
+  ],
+  "author": "adwait-kalsekar",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "prettier": "^3.3.3",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "morgan": "^1.10.0",
+    "winston": "^3.15.0"
+  }
+}
