@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { CORS_ORIGIN } from "./constants";
 import logger from "./utils/logger";
 import healthCheckRouter from "./routes/healthCheck.route";
+import cookieParser from "cookie-parser";
 
 // CONFIGS
 dotenv.config();
@@ -41,6 +42,7 @@ const app = express();
 // MIDDLEWARES
 app.use(cors(corsConfig));
 app.use(morgan(morganFormat, morganConfig));
+app.use(cookieParser());
 app.use(express.json(jsonConfig));
 app.use(express.urlencoded(urlencodedConfig));
 app.use(express.static("public"));
