@@ -9,15 +9,11 @@ import {
 } from "../validators/user.validator";
 import ApiResponse from "../utils/ApiResponse";
 import ApiError from "../utils/ApiError";
-import { User } from "../models/user.model";
+import { User, UserRefreshTokenPayload } from "../models/user.model";
 import { uploadToCloudinary, deleteFromCloudinary } from "../utils/cloudinary";
 import { Profile } from "../models/profile.model";
 import logger from "../utils/logger";
 import { NODE_ENV, REFRESH_TOKEN_SECRET } from "../constants";
-
-interface UserRefreshTokenPayload extends JwtPayload {
-  _id: string;
-}
 
 const options: CookieOptions = {
   httpOnly: true,
@@ -172,7 +168,21 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const logoutUser = asyncHandler(async (req: Request, res: Response) => {
-  await User.findByIdAndUpdate();
+  await User.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
+    },
+    { new: true },
+  );
+
+  res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User Logged Out successfully"));
 });
 
 const refreshAccessToken = asyncHandler(async (req: Request, res: Response) => {

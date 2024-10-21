@@ -1,12 +1,23 @@
 import mongoose, { Model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+
 import {
   ACCESS_TOKEN_EXPIRY,
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRY,
   REFRESH_TOKEN_SECRET,
 } from "../constants";
+
+export interface UserRefreshTokenPayload extends JwtPayload {
+  _id: string;
+}
+
+export interface UserAccessTokenPayload extends JwtPayload {
+  _id: string;
+  email: string;
+  username: string;
+}
 
 interface IUser extends Document {
   fullName: string;
