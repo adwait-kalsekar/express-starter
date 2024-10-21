@@ -5,13 +5,11 @@ const profileSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     avatar: {
       type: String,
-      required: [true, "Avatar is Required"],
-    },
-    coverImage: {
-      type: String,
+      default: null,
     },
   },
   {

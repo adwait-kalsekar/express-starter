@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Node Environment
+const NODE_ENV = process.env.NODE_ENV;
+
 // Express app constants
 const PORT = process.env.PORT || 8000;
 const CORS_ORIGIN = process.env.CORS_ORIGIN;
@@ -19,6 +22,7 @@ const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
 
 export {
+  NODE_ENV,
   PORT,
   CORS_ORIGIN,
   MONGODB_URL,
